@@ -21,8 +21,8 @@ include('includes/header.php');
         <br>
         <img src="assets/img/logo.png" class="img-fluid" alt="Punto de venta">
         <br><br>
-        <a href="#"><button type="button" class="btn btn-success btn1">Vender</button></a>
-        <a href="#"><button type="button" class="btn btn-success btn1">Ventas</button></a>
+        <a href="views/sales/sales_form.php"><button type="button" class="btn btn-success btn1">Vender</button></a>
+        <a href="views/sales/sales_list.php"><button type="button" class="btn btn-success btn1">Ventas</button></a>
         <a href="views/product/product_list.php"><button type="button" class="btn btn-secondary btn2">Lista de Productos</button></a>
         <a href="views/product/product_form.php"><button type="button" class="btn btn-secondary btn2">Administrar Productos</button></a>
     </div>
