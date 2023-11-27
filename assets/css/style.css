@@ -1,3 +1,11 @@
-h1{
-    color:red;
+.index h1{
+    font-weight: bold;
+}
+
+.index img{
+    width: 350px;
+}
+
+.btn.btn-success.btn1,.btn.btn-secondary.btn2{
+    font-size: 24px;
 }

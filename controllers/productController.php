@@ -11,43 +11,64 @@ class ProductController {
                 VALUES ('$nombre', '$categoria', '$fecha_vencimiento', '$cantidad')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Producto creado con éxito";
+            echo '<script>';
+            echo 'alert("Producto creado con éxito");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';            
         } else {
-            echo "Error al crear el producto: " . $conn->error;
+            echo '<script>';
+            echo 'alert("Error al crear el producto: ' . $conn->error . '");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';
         }
     }
 
     public function readProducts() {
         global $conn;
-
+    
         $sql = "SELECT * FROM productos";
         $result = $conn->query($sql);
-
+    
         $products = [];
-
+    
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+            echo '<table class="table table-bordered">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>ID</th>';
+            echo '<th>Nombre</th>';
+            echo '<th>Categoría</th>';
+            echo '<th>Fecha de Vencimiento</th>';
+            echo '<th>Cantidad</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+    
+            while ($row = $result->fetch_assoc()) {
                 $product = new Product();
                 $product->id_producto = $row['id_producto'];
                 $product->nombre = $row['nombre'];
                 $product->categoria = $row['categoria'];
                 $product->fecha_vencimiento = $row['fecha_vencimiento'];
                 $product->cantidad = $row['cantidad'];
-
+    
                 $products[] = $product;
+    
+                echo '<tr>';
+                echo '<td>' . $product->id_producto . '</td>';
+                echo '<td>' . $product->nombre . '</td>';
+                echo '<td>' . $product->categoria . '</td>';
+                echo '<td>' . $product->fecha_vencimiento . '</td>';
+                echo '<td>' . $product->cantidad . '</td>';
+                echo '</tr>';
             }
-
-            foreach ($products as $product) {
-                echo "ID: " . $product->id_producto . "<br>";
-                echo "Nombre: " . $product->nombre . "<br>";
-                echo "Categoría: " . $product->categoria . "<br>";
-                echo "Fecha de Vencimiento: " . $product->fecha_vencimiento . "<br>";
-                echo "Cantidad: " . $product->cantidad . "<br><br>";
-            }
+    
+            echo '</tbody>';
+            echo '</table>';
         } else {
             echo "No hay productos disponibles";
         }
-    }
+    }    
 
     public function updateProduct($id, $nombre, $categoria, $fecha_vencimiento, $cantidad) {
         global $conn;
@@ -60,9 +81,15 @@ class ProductController {
                 WHERE id_producto = '$id'";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Producto actualizado con éxito";
+            echo '<script>';
+            echo 'alert("Producto actualizado con éxito");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';
         } else {
-            echo "Error al actualizar el producto: " . $conn->error;
+            echo '<script>';
+            echo 'alert("Error al crear el producto: ' . $conn->error . '");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';
         }
     }
 
@@ -72,9 +99,15 @@ class ProductController {
         $sql = "DELETE FROM productos WHERE id_producto = '$id'";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Producto eliminado con éxito";
+            echo '<script>';
+            echo 'alert("Producto eliminado con éxito");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';
         } else {
-            echo "Error al eliminar el producto: " . $conn->error;
+            echo '<script>';
+            echo 'alert("Error al crear el producto: ' . $conn->error . '");';
+            echo 'window.location.href="../../views/product/product_form.php";';
+            echo '</script>';
         }
     }
 }
