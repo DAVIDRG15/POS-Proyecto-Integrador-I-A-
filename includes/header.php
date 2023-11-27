@@ -5,4 +5,11 @@ nav {
 }
 </style>
 
-<nav></nav>
+<nav>
+    <div class="container">
+        <br>
+            <a href="../../index.php">
+                <button class="btn btn-info">INICIO</button>
+            </a>
+    </div>
+</nav>
