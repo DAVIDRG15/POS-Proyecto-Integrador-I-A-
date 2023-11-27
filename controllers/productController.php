@@ -48,19 +48,35 @@ class ProductController {
             echo "No hay productos disponibles";
         }
     }
+
+    public function updateProduct($id, $nombre, $categoria, $fecha_vencimiento, $cantidad) {
+        global $conn;
+
+        $sql = "UPDATE productos SET 
+                nombre = '$nombre', 
+                categoria = '$categoria', 
+                fecha_vencimiento = '$fecha_vencimiento', 
+                cantidad = '$cantidad' 
+                WHERE id_producto = '$id'";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Producto actualizado con éxito";
+        } else {
+            echo "Error al actualizar el producto: " . $conn->error;
+        }
+    }
+
+    public function deleteProduct($id) {
+        global $conn;
+
+        $sql = "DELETE FROM productos WHERE id_producto = '$id'";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Producto eliminado con éxito";
+        } else {
+            echo "Error al eliminar el producto: " . $conn->error;
+        }
+    }
 }
-
-// Crear productos
-$productController = new ProductController();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"];
-    $categoria = $_POST["categoria"];
-    $fecha_vencimiento = $_POST["fecha_vencimiento"];
-    $cantidad = $_POST["cantidad"];
-
-    $productController->createProduct($nombre, $categoria, $fecha_vencimiento, $cantidad);
-}
-//
 
 ?>
