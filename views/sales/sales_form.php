@@ -38,7 +38,7 @@ function agregarAlCarrito($producto) {
 
     $_SESSION['carrito'][] = $producto;
 
-    echo "Producto agregado al carrito: {$producto['nombre']} - {$producto['precio']}<br>";
+    /* echo "Producto agregado al carrito: {$producto['nombre']} - {$producto['precio']}<br>"; */
 }
 
 function quitarDelCarrito($id_producto_quitar) {
@@ -51,7 +51,8 @@ function quitarDelCarrito($id_producto_quitar) {
     foreach ($_SESSION['carrito'] as $key => $producto) {
         if ($producto['id_producto'] == $id_producto_quitar) {
             unset($_SESSION['carrito'][$key]);
-            echo "Producto quitado del carrito: {$producto['nombre']} - {$producto['precio']}<br>";
+            $mensaje = "Producto quitado del carrito: {$producto['nombre']} - {$producto['precio']}";
+            echo '<script>alert("' . $mensaje . '");</script>';
             return;
         }
     }
@@ -159,38 +160,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Carrito de Compras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 </head>
 
+<?php
+include('../../includes/header.php');
+?>
+
 <body>
-    <h1>Productos</h1>
 
-    <h2>Carrito de Compras</h2>
-    <ul>
-        <?php
-        if (!empty($_SESSION['carrito'])) {
-            foreach ($_SESSION['carrito'] as $producto) {
-                echo "<li>{$producto['nombre']} - {$producto['precio']}</li>";
-            }
-        } else {
-            echo "<li>El carrito está vacío.</li>";
-        }
-        ?>
-    </ul>
+    <div class="container mt-4 mb-4">
 
-    <form method="post" action="">
-        <label for="id_producto">ID del Producto:</label>
-        <input type="text" name="id_producto">
-        <label for="pago">Método de Pago:</label>
-        <select name="pago" required>
-            <option value="TDD">Tarjeta de Débito</option>
-            <option value="TDC">Tarjeta de Crédito</option>
-            <option value="Efectivo">Efectivo</option>
-        </select>
-        <input type="submit" name="agregar_carrito" value="Agregar al Carrito">
-        <input type="submit" name="quitar_carrito" value="Quitar del Carrito">
-        <input type="submit" name="finalizar_venta" value="Finalizar Venta">
-    </form>
+        <h1>Vender</h1>
+
+        <h2>Carrito de Compras</h2>
+        <ul>
+            <?php
+                if (!empty($_SESSION['carrito'])) {
+                    foreach ($_SESSION['carrito'] as $producto) {
+                        echo "<ul class='list-group'>";
+                        echo "<li class='list-group-item disabled'>{$producto['nombre']} - {$producto['precio']}</li>";
+                        echo "</ul>";
+                    }
+                } else {
+                    echo "<ul class='list-group'>";
+                    echo "<li class='list-group-item disabled'>El carrito está vacío.</li>";
+                    echo "</ul>";
+                }
+            ?>
+        </ul>
+
+        <form method="post" action="">
+            <label for="id_producto" class="form-label">ID del Producto:</label>
+            <input type="text" class="form-control" name="id_producto">
+            <br>
+            <label for="pago" class="form-label">Método de Pago:</label>
+            <select name="pago" class="form-select" required>
+                <option value="TDD">Tarjeta de Débito</option>
+                <option value="TDC">Tarjeta de Crédito</option>
+                <option value="Efectivo">Efectivo</option>
+            </select>
+            <br>
+            <input type="submit" class="btn btn-warning" name="agregar_carrito" value="Agregar al Carrito">
+            <input type="submit" class="btn btn-danger" name="quitar_carrito" value="Quitar del Carrito">
+            <input type="submit" class="btn btn-success" name="finalizar_venta" value="Finalizar Venta">
+        </form>
+
+    </div>
+
 </body>
+
+<?php
+include('../../includes/footer.php');
+?>
 
 </html>
