@@ -59,3 +59,7 @@ CREATE TABLE PRODUCTOS (
     precio DECIMAL(10,2),
     cantidad INT
 );
+
+-- Agregar campo 'total' en tabla 'REGISRO_DE_VENTA'
+ALTER TABLE REGISTRO_DE_VENTA
+ADD COLUMN total DECIMAL(10, 2);
