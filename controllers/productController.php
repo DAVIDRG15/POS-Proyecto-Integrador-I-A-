@@ -5,11 +5,11 @@ include_once(__DIR__ . '/../models/product.php');
 
 class ProductController {
     
-    public function createProduct($nombre, $categoria, $fecha_vencimiento, $cantidad) {
+    public function createProduct($nombre, $categoria, $fecha_vencimiento, $precio, $cantidad) {
         global $conn;
 
-        $sql = "INSERT INTO productos (nombre, categoria, fecha_vencimiento, cantidad) 
-                VALUES ('$nombre', '$categoria', '$fecha_vencimiento', '$cantidad')";
+        $sql = "INSERT INTO productos (nombre, categoria, fecha_vencimiento, precio, cantidad) 
+                VALUES ('$nombre', '$categoria', '$fecha_vencimiento', '$precio', '$cantidad')";
 
         $result = $conn->query($sql);
 
@@ -42,6 +42,7 @@ class ProductController {
             echo '<th>Nombre</th>';
             echo '<th>Categoría</th>';
             echo '<th>Fecha de Vencimiento</th>';
+            echo '<th>Precio</th>';
             echo '<th>Cantidad</th>';
             echo '</tr>';
             echo '</thead>';
@@ -53,6 +54,7 @@ class ProductController {
                 $product->nombre = $row['nombre'];
                 $product->categoria = $row['categoria'];
                 $product->fecha_vencimiento = $row['fecha_vencimiento'];
+                $product->precio = $row['precio'];
                 $product->cantidad = $row['cantidad'];
     
                 $products[] = $product;
@@ -62,6 +64,7 @@ class ProductController {
                 echo '<td>' . $product->nombre . '</td>';
                 echo '<td>' . $product->categoria . '</td>';
                 echo '<td>' . $product->fecha_vencimiento . '</td>';
+                echo '<td>' . '$'.$product->precio . '</td>';
                 echo '<td>' . $product->cantidad . '</td>';
                 echo '</tr>';
             }
@@ -73,14 +76,15 @@ class ProductController {
         }
     }    
 
-    public function updateProduct($id, $nombre, $categoria, $fecha_vencimiento, $cantidad) {
+    public function updateProduct($id, $nombre, $categoria, $fecha_vencimiento, $precio, $cantidad) {
         global $conn;
 
         $sql = "UPDATE productos SET 
                 nombre = '$nombre', 
                 categoria = '$categoria', 
                 fecha_vencimiento = '$fecha_vencimiento', 
-                cantidad = '$cantidad' 
+                precio = '$precio',
+                cantidad = '$cantidad'
                 WHERE id_producto = '$id'";
 
         $result = $conn->query($sql);

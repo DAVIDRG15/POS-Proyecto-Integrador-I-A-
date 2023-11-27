@@ -37,6 +37,9 @@ include('../../includes/header.php');
             <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
             <input type="date" class="form-control" name="fecha_vencimiento" required><br>
 
+            <label for="precio" class="form-label">Precio:</label>
+            <input type="text" class="form-control" name="precio" step="any" required><br>
+
             <label for="cantidad" class="form-label">Cantidad:</label>
             <input type="number" class="form-control" name="cantidad" required><br>
 
@@ -60,6 +63,9 @@ include('../../includes/header.php');
 
             <label for="Nfecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
             <input type="date" class="form-control" name="Nfecha_vencimiento" required><br>
+
+            <label for="Nprecio" class="form-label">Precio:</label>
+            <input type="text" class="form-control" name="Nprecio" step="any" required><br>
 
             <label for="Ncantidad" class="form-label">Cantidad:</label>
             <input type="number" class="form-control" name="Ncantidad" required><br>

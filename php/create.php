@@ -6,8 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $categoria = $_POST["categoria"];
     $fecha_vencimiento = $_POST["fecha_vencimiento"];
+    $precio = $_POST["precio"];
     $cantidad = $_POST["cantidad"];
 
-    $productController->createProduct($nombre, $categoria, $fecha_vencimiento, $cantidad);
+    $productController->createProduct($nombre, $categoria, $fecha_vencimiento, $precio, $cantidad);
 }
 ?>

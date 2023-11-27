@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "pos";
+$dbname = "punto_de_venta";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
