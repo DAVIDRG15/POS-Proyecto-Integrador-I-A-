@@ -4,13 +4,16 @@ include_once(__DIR__ . '/../config/config.php');
 include_once(__DIR__ . '/../models/product.php');
 
 class ProductController {
+    
     public function createProduct($nombre, $categoria, $fecha_vencimiento, $cantidad) {
         global $conn;
 
         $sql = "INSERT INTO productos (nombre, categoria, fecha_vencimiento, cantidad) 
                 VALUES ('$nombre', '$categoria', '$fecha_vencimiento', '$cantidad')";
 
-        if ($conn->query($sql) === TRUE) {
+        $result = $conn->query($sql);
+
+        if ($result === TRUE) {
             echo '<script>';
             echo 'alert("Producto creado con éxito");';
             echo 'window.location.href="../../views/product/product_form.php";';
@@ -80,36 +83,55 @@ class ProductController {
                 cantidad = '$cantidad' 
                 WHERE id_producto = '$id'";
 
-        if ($conn->query($sql) === TRUE) {
-            echo '<script>';
-            echo 'alert("Producto actualizado con éxito");';
-            echo 'window.location.href="../../views/product/product_form.php";';
-            echo '</script>';
+        $result = $conn->query($sql);
+
+        if ($result === TRUE) {
+            if ($conn->affected_rows > 0) {
+                echo '<script>';
+                echo 'alert("Producto actualizado con éxito");';
+                echo 'window.location.href="../../views/product/product_form.php";';
+                echo '</script>';
+            } else {
+                echo '<script>';
+                echo 'alert("No se encontró ningún producto con el ID proporcionado.");';
+                echo 'window.location.href="../../views/product/product_form.php";';
+                echo '</script>';
+            }
         } else {
             echo '<script>';
-            echo 'alert("Error al crear el producto: ' . $conn->error . '");';
+            echo 'alert("Error al actualizar el producto: ' . $conn->error . '");';
             echo 'window.location.href="../../views/product/product_form.php";';
             echo '</script>';
-        }
     }
+}
 
     public function deleteProduct($id) {
         global $conn;
 
         $sql = "DELETE FROM productos WHERE id_producto = '$id'";
 
-        if ($conn->query($sql) === TRUE) {
-            echo '<script>';
-            echo 'alert("Producto eliminado con éxito");';
-            echo 'window.location.href="../../views/product/product_form.php";';
-            echo '</script>';
+        $result = $conn->query($sql);
+
+        if ($result === TRUE) {
+            if ($conn->affected_rows > 0) {
+                echo '<script>';
+                echo 'alert("Producto eliminado con éxito");';
+                echo 'window.location.href="../../views/product/product_form.php";';
+                echo '</script>';
+            } else {
+                echo '<script>';
+                echo 'alert("No se encontró ningún producto con el ID proporcionado.");';
+                echo 'window.location.href="../../views/product/product_form.php";';
+                echo '</script>';
+            }
         } else {
             echo '<script>';
-            echo 'alert("Error al crear el producto: ' . $conn->error . '");';
+            echo 'alert("Error al eliminar el producto: ' . $conn->error . '");';
             echo 'window.location.href="../../views/product/product_form.php";';
             echo '</script>';
-        }
     }
+}
+
 }
 
 ?>
